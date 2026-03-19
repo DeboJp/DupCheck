@@ -5,18 +5,24 @@ DupCheck is a Chrome extension engineered to track your job application history 
 
 ---
 
-# Purpose
+# Why DupCheck
 
-Companies often post multiple times for the same role on different platforms or across weeks. There is also this expectation that as jobseekers we should avoid applying to the same role twice, in quick succession. And there is good reason to that. However, as a jobseeker I dont often have the time or resources to keep track of duplicate applications. There are many indepth jobtrackers in the market, and some job portals prevent duplicates directly, but many dont. DupCheck is built purposefully for the sole objective of reducing duplicate applications. I have faced this issue myself, where recruiters have personally reached out to me to kindly ask to withdraw, to let me know that I have already applied for the role, or to apply at a later date. Personally, as a jobseeker, I feel for these recruiters, and I would like to avoid such situations in the future, and in the worst case be blacklisted due to spamming. Hopefully in the future all job portals will have this feature built-in, but for now and for those who are feeling the same issue, DupCheck is here to help.
+The modern job search is chaotic. Companies often repost the same role or link over several weeks, making it difficult to remember exactly what you’ve already applied to.
+
+I built DupCheck out of personal frustration. I’ve had recruiters reach out to kindly ask me to withdraw an application because I had inadvertently submitted for the same role twice. It’s an awkward situation, and more importantly, it creates unnecessary work for the recruiters we’re trying to impress. In the worst-case scenario, repeated duplicate applications can lead to being flagged for spamming, or at worst being blacklisted/timed out.
+
+While there are many complex job trackers on the market, DupCheck is built with a singular, lightweight focus: preventing duplicate applications by tracking the links you've already used.
+
+If you are applying to a role that has been reposted or uploaded again with the same destination, DupCheck will catch it before you hit "submit." I hope that one day all job portals will have this duplicate detection built-in. But until then, DupCheck is here to help you protect your professional reputation and respect recruiters' time (who we are trying to impress :').
 
 ---
 
 ## Capabilities
 
-- **Algorithmic Duplicate Prevention**: Tracks URLs locally and intelligently detects duplicates using Levenshtein distance and domain-level comparison.
+- **Algorithmic Duplicate Prevention**: Tracks URLs locally and detects duplicates using Levenshtein distance and domain-level comparison.
 - **Contextual Overlays**: Smart, non-intrusive toasts inject natively into complex SPAs (like LinkedIn or Workday) to render active historical match previews exactly when you need them.
 - **Visual URL Diffing**: Instantly compare current URLs against your saved history with dynamic color-coding matching (`.char-match`) and non-matching characters (`.char-diff`).
-- **Data Ownership**: Your data never leaves your machine. Export your complete categorized tracking database strictly to a local CSV with a single click.
+- **Data Ownership**: Your data never leaves your machine(all data is stored locally in your browser). Export your complete categorized tracking database strictly to a local CSV when you need to.
 
 ---
 

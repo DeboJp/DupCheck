@@ -110,7 +110,7 @@ export function diffStringsColored(current, stored) {
 
 export function exportToCSV(jobs) {
     if (!jobs || jobs.length === 0) return;
-    const header = ['URL', 'Date Added', 'Timestamp'];
+    const header = ['URL', 'Date', 'Time'];
     
     const escapeCsv = (val) => {
         if (val === null || val === undefined) return '""';
@@ -120,11 +120,14 @@ export function exportToCSV(jobs) {
         return `"${str.replace(/"/g, '""')}"`;
     };
 
-    const rows = jobs.map(j => [
-        escapeCsv(j.url), 
-        escapeCsv(j.dateString), 
-        escapeCsv(j.timestamp)
-    ]);
+    const rows = jobs.map(j => {
+        const d = new Date(j.timestamp);
+        return [
+            escapeCsv(j.url),
+            escapeCsv(d.toLocaleDateString()),
+            escapeCsv(d.toLocaleTimeString())
+        ];
+    });
     
     let csvContent = header.join(",") + "\n"
         + rows.map(row => row.join(",")).join("\n");

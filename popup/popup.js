@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const statusBanner = document.getElementById('statusBanner');
   const statusIcon = document.getElementById('statusIcon');
   const statusMsg = document.getElementById('statusMsg');
+  const onboardingState = document.getElementById('onboardingState');
+  const mainDashboard = document.getElementById('mainDashboard');
 
   chrome.storage.local.get(['appliedJobs', 'isEnabled'], async (result) => {
     const isEnabled = result.isEnabled !== false; 
@@ -27,6 +29,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     const jobs = result.appliedJobs || [];
+    
+    if (jobs.length === 0) {
+      onboardingState.style.display = 'block';
+      mainDashboard.style.display = 'none';
+      exportCsvBtn.style.display = 'none';
+      return; 
+    } else {
+      onboardingState.style.display = 'none';
+      mainDashboard.style.display = 'block';
+      exportCsvBtn.style.display = 'flex';
+    }
     
     exportCsvBtn.addEventListener('click', () => {
         exportToCSV(jobs);

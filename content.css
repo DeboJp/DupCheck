@@ -88,6 +88,19 @@
   align-items: center;
 }
 
+.jobtrack-toast-header svg.jobtrack-toast-logo {
+  width: 18px;
+  height: 18px;
+  color: var(--jobtrack-primary);
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+
+.jobtrack-toast-header svg.jobtrack-toast-logo:hover {
+  transform: rotate(-10deg) scale(1.15);
+  color: var(--jobtrack-primary);
+}
+
 .jobtrack-logo {
   font-weight: 700;
   font-size: 13px;

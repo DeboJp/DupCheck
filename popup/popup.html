@@ -25,7 +25,20 @@
     </div>
   </div>
 
-  <div class="status-banner" id="statusBanner">
+  <div id="onboardingState" class="onboarding-state" style="display: none;">
+    <div class="onboarding-icon">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DupCheck Logo">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h2 class="onboarding-title">Welcome to DupCheck</h2>
+    <p class="onboarding-text">Your application history is currently empty.</p>
+    <p class="onboarding-text">To get started, navigate to any job posting and click the <strong>Track Job</strong> button in the automatic overlay on the bottom right of your screen.</p>
+  </div>
+
+  <div id="mainDashboard">
+    <div class="status-banner" id="statusBanner">
     <span class="status-icon" id="statusIcon" aria-hidden="true">--</span>
     <span class="status-msg" id="statusMsg" aria-live="polite">Analyzing URL...</span>
   </div>
@@ -52,6 +65,7 @@
 
   <div class="section-title">Recent History</div>
   <ul class="list-container" id="jobList"></ul>
+  </div>
 
   <script type="module" src="popup.js"></script>
 </body>
