@@ -2,6 +2,7 @@ import { normalizeUrl, getSimilarityPercentage, isDomainMatch, getTodayDateStrin
 
 document.addEventListener('DOMContentLoaded', async () => {
   const toggleSwitch = document.getElementById('toggleSwitch');
+  const clearHistoryBtn = document.getElementById('clearHistoryBtn');
   const exportCsvBtn = document.getElementById('exportCsvBtn');
   const totalCountEl = document.getElementById('totalCount');
   const dailyCountEl = document.getElementById('dailyCount');
@@ -34,13 +35,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       onboardingState.style.display = 'block';
       mainDashboard.style.display = 'none';
       exportCsvBtn.style.display = 'none';
+      clearHistoryBtn.style.display = 'none';
       return; 
     } else {
       onboardingState.style.display = 'none';
       mainDashboard.style.display = 'block';
       exportCsvBtn.style.display = 'flex';
+      clearHistoryBtn.style.display = 'flex';
     }
     
+    clearHistoryBtn.addEventListener('click', () => {
+        if (confirm('Are you sure you want to clear your entire history? This action cannot be undone.')) {
+            chrome.storage.local.set({ appliedJobs: [] }, () => {
+                location.reload();
+            });
+        }
+    });
+
     exportCsvBtn.addEventListener('click', () => {
         exportToCSV(jobs);
     });

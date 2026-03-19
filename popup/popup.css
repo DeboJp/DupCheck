@@ -115,7 +115,8 @@ body {
   gap: 12px;
 }
 
-#exportCsvBtn {
+#exportCsvBtn,
+#clearHistoryBtn {
   background: none; 
   border: 1px solid transparent; 
   padding: 6px;
@@ -126,6 +127,12 @@ body {
   align-items: center; 
   justify-content: center; 
   border-radius: 0;
+}
+
+#clearHistoryBtn:hover {
+  color: var(--status-red);
+  border-color: var(--status-red);
+  background-color: var(--status-bg-red);
 }
 
 #exportCsvBtn:hover { 
