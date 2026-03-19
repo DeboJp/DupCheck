@@ -23,12 +23,11 @@ if (!window.jobTrackContentScriptLoaded) {
     
     let matchesHtml = '';
     if (matches && matches.length > 0) {
-      matchesHtml = `<div class="jobtrack-matches-preview" style="font-size: 11px; max-height: 180px; overflow-y: auto; background: #ffffff; padding: 12px; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);">
-        <strong style="color: #4b5563; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;">Top Similar History:</strong>
-        <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 8px;">`;
+      matchesHtml = `<div class="jobtrack-matches-preview">
+        <strong class="jobtrack-preview-title">Top Similar History:</strong>
+        <ul class="jobtrack-matches-list">`;
       matches.forEach(m => {
-          let badgeColor = m.sim === 100 ? '#fdf2f2' : (m.sim > 70 ? '#fef7ed' : '#f3f4f6');
-          let textColor = m.sim === 100 ? '#d9534f' : (m.sim > 70 ? '#f0ad4e' : '#6b7280');
+          let badgeClass = m.sim === 100 ? 'jobtrack-badge-exact' : (m.sim > 70 ? 'jobtrack-badge-high' : 'jobtrack-badge-low');
           
           let daysAgo = Math.floor((Date.now() - m.timestamp) / (1000 * 60 * 60 * 24));
           let daysText = daysAgo === 0 ? "Today" : (daysAgo === 1 ? "1 day ago" : `${daysAgo} days ago`);
@@ -36,33 +35,31 @@ if (!window.jobTrackContentScriptLoaded) {
           let timeAgoStr = `${daysText} (${dateText})`;
           
           matchesHtml += `
-            <div style="padding: 8px; background: #f9fafb; border-radius: 6px; border: 1px solid #f3f4f6;">
-              <div style="display: flex; justify-content: space-between; margin-bottom: 4px; align-items: center;">
-                <span style="font-weight: bold; color: ${textColor}; background: ${badgeColor}; padding: 2px 6px; border-radius: 4px; font-size: 9px;">${m.sim}% MATCH</span>
-                <span style="font-size: 9px; color: #6b7280; font-weight: 500;">${timeAgoStr}</span>
+            <li class="jobtrack-preview-item">
+              <div class="jobtrack-preview-meta">
+                <span class="jobtrack-preview-badge ${badgeClass}">${m.sim}% MATCH</span>
+                <span class="jobtrack-preview-time">${timeAgoStr}</span>
               </div>
-              <div style="word-wrap: break-word; line-height: 1.4; color: #1f2937;">
-                <a href="${m.url}" target="_blank" style="color: inherit; text-decoration: none;" title="Open match in new tab">
-                  ${m.coloredDiff}
-                </a>
-              </div>
-            </div>
+              <a href="${m.url}" target="_blank" class="jobtrack-preview-link" title="Open match in new tab">
+                ${m.coloredDiff}
+              </a>
+            </li>
           `;
       });
-      matchesHtml += `</div></div>`;
+      matchesHtml += `</ul></div>`;
     }
     
     let headerText = isExactMatch ? '⚠️ Exact Match Found' : 'New Job Application?';
     let btnHtml = isExactMatch 
-      ? `<button id="jobtrack-add-btn" disabled style="background:#ccc;cursor:not-allowed;">Already Tracked</button>` 
+      ? `<button id="jobtrack-add-btn" disabled>Already Tracked</button>` 
       : `<button id="jobtrack-add-btn">Track Job</button>`;
 
     container.innerHTML = `
       <div class="jobtrack-toast-header">
         <span class="jobtrack-logo">DupCheck</span>
-        <button id="jobtrack-close-btn">&times;</button>
+        <button id="jobtrack-close-btn" aria-label="Dismiss Alert">&times;</button>
       </div>
-      <div class="jobtrack-toast-body">
+      <div class="jobtrack-toast-body" aria-live="polite">
         <p>${headerText}</p>
         <span class="jobtrack-daily-count">Today: ${dailyCount}</span>
       </div>

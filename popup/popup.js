@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const urlHTML = highlightAgainstNorm ? j.coloredDiff : j.url;
 
-      const item = document.createElement('div');
+      const item = document.createElement('li');
       item.className = 'job-item';
       item.innerHTML = `
         <div class="job-meta">
