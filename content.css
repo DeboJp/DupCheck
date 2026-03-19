@@ -1,0 +1,124 @@
+#jobtrack-toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 280px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  z-index: 999999;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #333;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: jobtrack-slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+@keyframes jobtrack-slide-up {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.jobtrack-toast-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.jobtrack-logo {
+  font-weight: 700;
+  font-size: 14px;
+  background: linear-gradient(135deg, #4688F1, #2b61b8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#jobtrack-close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  line-height: 1;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  transition: color 0.2s;
+}
+
+#jobtrack-close-btn:hover {
+  color: #333;
+}
+
+.jobtrack-toast-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.jobtrack-toast-body p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.jobtrack-daily-count {
+  background: #f0f4ff;
+  color: #4688F1;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+#jobtrack-add-btn {
+  background: #4688F1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  width: 100%;
+}
+
+#jobtrack-add-btn:hover {
+  background: #3a75d1;
+}
+
+#jobtrack-add-btn:active {
+  transform: scale(0.98);
+}
+
+#jobtrack-add-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Highlight character matches */
+.char-match {
+  color: #2b542c;
+  background-color: #d4edda;
+  font-weight: 600;
+  border-radius: 2px;
+}
+
+.char-diff {
+  color: #b52b27;
+  background-color: #fdf2f2;
+}

@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "DupCheck",
+  "version": "1.2",
+  "description": "Single-purpose extension that tracks duplicate jobs and safeguards against applying twice.",
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "DupCheck"
+  }
+}
