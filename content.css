@@ -59,7 +59,7 @@
   width: 300px; /* Slight bump for monospace urls */
   background: var(--jobtrack-bg);
   border: 1px solid var(--jobtrack-border);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Flattened standard */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
   z-index: 2147483647; /* MAX INT for native SPA injection */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: var(--jobtrack-text-main);

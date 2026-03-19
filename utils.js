@@ -111,17 +111,36 @@ export function diffStringsColored(current, stored) {
 export function exportToCSV(jobs) {
     if (!jobs || jobs.length === 0) return;
     const header = ['URL', 'Date Added', 'Timestamp'];
-    const rows = jobs.map(j => [j.url, j.dateString, j.timestamp]);
     
-    let csvContent = "data:text/csv;charset=utf-8," 
-        + header.join(",") + "\\n"
-        + rows.map(e => e.map(item => `"${item}"`).join(",")).join("\\n");
+    const escapeCsv = (val) => {
+        if (val === null || val === undefined) return '""';
+        const str = String(val);
+        // If it contains a quote, escape it by doubling it.
+        // Also always wrap the string in quotes to handle commas automatically.
+        return `"${str.replace(/"/g, '""')}"`;
+    };
+
+    const rows = jobs.map(j => [
+        escapeCsv(j.url), 
+        escapeCsv(j.dateString), 
+        escapeCsv(j.timestamp)
+    ]);
+    
+    let csvContent = header.join(",") + "\n"
+        + rows.map(row => row.join(",")).join("\n");
         
-    const encodedUri = encodeURI(csvContent);
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const blobUrl = URL.createObjectURL(blob);
+    
     const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
+    link.setAttribute("href", blobUrl);
     link.setAttribute("download", "dupcheck_history.csv");
+    
+    // Append -> Click -> Remove to trigger download without disrupting actual page DOM
     document.body.appendChild(link);
     link.click();
-    link.remove();
+    document.body.removeChild(link);
+    
+    // Clear memory
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
 }

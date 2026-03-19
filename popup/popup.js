@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const currentTabUrl = tabs[0].url || '';
       
       if (currentTabUrl.startsWith('chrome://')) {
-        setStatusBanner('grey', 'Not a trackable web page.');
+        setStatusBanner('grey', 'DupCheck ignores browser settings pages.');
         return;
       }
 
@@ -135,19 +135,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     statusBanner.className = 'status-banner ' + colorClass;
     if (colorClass === 'red') {
       statusIcon.textContent = '⛔';
-      statusMsg.textContent = msgOverride || 'Exact match found in DB!';
+      statusMsg.textContent = msgOverride || "Whoops, you've applied here before.";
     } else if (colorClass === 'orange') {
       statusIcon.textContent = '⚠️';
-      statusMsg.textContent = msgOverride || 'High similarity (possible duplicate).';
+      statusMsg.textContent = msgOverride || 'Careful, this looks highly repetitive.';
     } else if (colorClass === 'yellow') {
       statusIcon.textContent = '🏢';
-      statusMsg.textContent = msgOverride || 'Company domain matched.';
+      statusMsg.textContent = msgOverride || "You've applied to this company before.";
     } else if (colorClass === 'green') {
       statusIcon.textContent = '✅';
-      statusMsg.textContent = msgOverride || 'No match found (Safe to apply).';
+      statusMsg.textContent = msgOverride || 'Clear to apply. No history found.';
     } else if (colorClass === 'grey') {
-      statusIcon.textContent = 'ℹ️';
-      statusMsg.textContent = msgOverride || 'Inactive';
+      statusIcon.textContent = '💤';
+      statusMsg.textContent = msgOverride || 'DupCheck is paused.';
     }
   }
 });

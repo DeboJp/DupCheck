@@ -49,10 +49,10 @@ if (!window.jobTrackContentScriptLoaded) {
       matchesHtml += `</ul></div>`;
     }
     
-    let headerText = isExactMatch ? '⚠️ Exact Match Found' : 'New Job Application?';
+    let headerText = isExactMatch ? '⚠️ Already Applied Here' : 'Looks Like a New Job';
     let btnHtml = isExactMatch 
-      ? `<button id="jobtrack-add-btn" disabled>Already Tracked</button>` 
-      : `<button id="jobtrack-add-btn">Track Job</button>`;
+      ? `<button id="jobtrack-add-btn" disabled>Already Logged</button>` 
+      : `<button id="jobtrack-add-btn">Add to History</button>`;
 
     container.innerHTML = `
       <div class="jobtrack-toast-header">
@@ -76,21 +76,22 @@ if (!window.jobTrackContentScriptLoaded) {
     const addBtn = document.getElementById('jobtrack-add-btn');
     if (!isExactMatch) {
       addBtn.addEventListener('click', () => {
-        addBtn.textContent = 'Tracking...';
+        addBtn.textContent = 'Saving...';
         addBtn.disabled = true;
 
         chrome.runtime.sendMessage({ action: 'add_to_db', url: url }, (response) => {
           if (response && response.success) {
-            addBtn.textContent = 'Tracked!';
-            addBtn.style.backgroundColor = '#5cb85c';
+            addBtn.textContent = 'Added!';
+            addBtn.style.backgroundColor = 'var(--jobtrack-status-green)';
+            addBtn.style.borderColor = 'var(--jobtrack-status-green)';
             setTimeout(() => {
               if (container.parentNode) container.remove();
             }, 1500);
           } else {
-            addBtn.textContent = 'Error/Exists';
+            addBtn.textContent = 'Failed / Exists';
             setTimeout(() => {
                addBtn.disabled = false;
-               addBtn.textContent = 'Track Job';
+               addBtn.textContent = 'Add to History';
             }, 2000);
           }
         });
