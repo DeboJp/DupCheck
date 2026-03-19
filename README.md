@@ -6,7 +6,7 @@
 
 DupCheck is a Chrome extension engineered to track your job application history and protect you from applying to the exact same role twice. When on, it monitors your active tabs and alerts you to duplicate applications using heuristic URL checking, right inside your browser.
 
-**Diclaimer**: Please understand this is simply a duplicate link checker. Job applications tend to have various links and unique IDs that are not unique across companies and formats are always changing. **Which is why by design we let you see the most likely link match and encourage users to click and double check to compare similarity.**
+**Diclaimer**: Please understand this is simply a duplicate link checker. Job applications tend to have various links(i.e. referral links) and unique IDs that are not unique across companies and formats are always changing. **Which is why by design we let you see the most likely link match and encourage users to click and double check to compare similarity.**
 
 ---
 
