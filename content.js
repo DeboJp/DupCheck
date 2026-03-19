@@ -81,9 +81,8 @@ if (!window.jobTrackContentScriptLoaded) {
 
         chrome.runtime.sendMessage({ action: 'add_to_db', url: url }, (response) => {
           if (response && response.success) {
-            addBtn.textContent = 'Added!';
-            addBtn.style.backgroundColor = 'var(--jobtrack-status-green)';
-            addBtn.style.borderColor = 'var(--jobtrack-status-green)';
+            addBtn.textContent = 'Tracked successfully';
+            addBtn.classList.add('success-state');
             setTimeout(() => {
               if (container.parentNode) container.remove();
             }, 1500);

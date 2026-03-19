@@ -1,32 +1,48 @@
 # DupCheck
+**The Invisible Guardian for Job Seekers.** 
 
-**DupCheck** is a single-purpose Chrome extension engineered to track your job application history flawlessly and protect you from unknowingly applying to the exact same job twice. It actively tracks, categorizes, and alerts you using visual diffs and URL similarity logic directly in your browser.
-
-## Features
-
-- **Duplicate Prevention:** Tracks URLs in local storage and intelligently detects duplicates using Levenshtein distance grouping and domain comparison.
-- **Auto-Injection Overlays (Toasts):** Smart auto-popups inject natively in your webpage on all web pages, rendering live match previews and supporting native SPAs like LinkedIn.
-- **Visual URL Diffing:** Compare the current URL string with your historically saved URLs, dynamically color-coding matching (`.char-match`) and non-matching characters (`.char-diff`) for unparalleled transparency.
-- **Export to CSV:** Own your own data. Easily export your total categorized database log straight to CSV locally with a single click.
-
-## Installation / Loading in Chrome Developer Mode
-
-1. Open a new tab in Google Chrome and type `chrome://extensions/`.
-2. Ensure the **Developer mode** toggle in the top right corner is turned **ON**.
-3. Click the **Load unpacked** button.
-4. Select the `DupCheck` extension folder (`/Users/debojyotipaul/Documents/JOB Chrome Extension/`).
-5. **Pin** the extension to your toolbar to get live badge count numbers on your applied jobs for the day and easily check matches!
-
-## Web Store Information
-
-- **Name**: DupCheck
-- **Short Description**: Track duplicate job applications and safeguard against applying twice.
-- **Categories**: Productivity, Workflow
-- **Permissions Justification**:
-  - `storage`: Essential for confidentially storing the job history URLs directly within your browser.
-  - `tabs` & `activeTab`: Necessary for detecting and inspecting your current URL to map against the local history.
-  - `scripting`: Key injection technique for securely rendering the "Add to DB" overlay on single page applications.
-  - `<all_urls>`: The tracker needs flexibility across random domains since job portals are deeply varied. 
+DupCheck is a Chrome extension engineered to track your job application history and protect you from applying to the exact same role twice. When on, it monitors your active tabs and alerts you to duplicate applications using heuristic URL checking, right inside your browser.
 
 ---
-*No remote servers are used. All your history lives strictly locally in `chrome.storage.local` inside your browser environment.*
+
+# Purpose
+
+Companies often post multiple times for the same role on different platforms or across weeks. There is also this expectation that as jobseekers we should avoid applying to the same role twice, in quick succession. And there is good reason to that. However, as a jobseeker I dont often have the time or resources to keep track of duplicate applications. There are many indepth jobtrackers in the market, and some job portals prevent duplicates directly, but many dont. DupCheck is built purposefully for the sole objective of reducing duplicate applications. I have faced this issue myself, where recruiters have personally reached out to me to kindly ask to withdraw, to let me know that I have already applied for the role, or to apply at a later date. Personally, as a jobseeker, I feel for these recruiters, and I would like to avoid such situations in the future, and in the worst case be blacklisted due to spamming. Hopefully in the future all job portals will have this feature built-in, but for now and for those who are feeling the same issue, DupCheck is here to help.
+
+---
+
+## Capabilities
+
+- **Algorithmic Duplicate Prevention**: Tracks URLs locally and intelligently detects duplicates using Levenshtein distance and domain-level comparison.
+- **Contextual Overlays**: Smart, non-intrusive toasts inject natively into complex SPAs (like LinkedIn or Workday) to render active historical match previews exactly when you need them.
+- **Visual URL Diffing**: Instantly compare current URLs against your saved history with dynamic color-coding matching (`.char-match`) and non-matching characters (`.char-diff`).
+- **Data Ownership**: Your data never leaves your machine. Export your complete categorized tracking database strictly to a local CSV with a single click.
+
+---
+
+## Local Setup
+
+DupCheck is currently in pre-release. You can install it locally via Chrome Developer Mode:
+
+1. Navigate to `chrome://extensions/` in Google Chrome.
+2. Toggle **Developer mode** `ON` (top right corner).
+3. Click **Load unpacked**.
+4. Select your local DupCheck directory (e.g., `/DupCheck Chome Extention/`).
+5. **Pin** the extension to your toolbar to access live daily application metrics and view your localized tracking history.
+
+---
+
+## Privacy & Architecture
+
+*DupCheck is fundamentally private by design. Zero remote servers are utilized.* 
+All execution and data persistence happens exclusively within your browser's local `chrome.storage.local` environment.
+
+**Core Permissions Requirements**:
+- `storage`: Essential for confidentially persisting your application URLs over time.
+- `tabs` & `activeTab`: Required to securely inspect your active tab's URL to compare against the local database.
+- `scripting`: Required to inject the isolated DupCheck CSS/JS Contextual Overlay directly onto job portals.
+- `<all_urls>`: Necessary to intercept job applications seamlessly, as job tracking portals are highly fragmented and unpredictable across the web.
+
+---
+
+*May your applications be unique and your offers plentiful. Happy hunting!*

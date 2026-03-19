@@ -99,13 +99,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
-  function renderList(list, containerEl, highlightAgainstNorm = null) {
-    if (list.length === 0) {
-      containerEl.innerHTML = '<div class="empty-state">No matching history found.</div>';
+  function renderList(jobsToRender, container, highlightAgainstNorm = null) {
+    container.innerHTML = '';
+    
+    if (jobsToRender.length === 0) {
+      container.innerHTML = '<li class="empty-state">All clear. You haven\'t tracked any jobs yet!</li>';
       return;
     }
-    containerEl.innerHTML = '';
-    list.forEach(j => {
+    jobsToRender.forEach(j => {
       let badgeClass = 'badge-grey';
       let badgeText = j.type ? (j.sim + '% Match') : 'History';
 
@@ -127,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       item.addEventListener('click', () => {
          chrome.tabs.create({ url: j.url });
       });
-      containerEl.appendChild(item);
+      container.appendChild(item);
     });
   }
 

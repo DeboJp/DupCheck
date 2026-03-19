@@ -44,7 +44,7 @@
     --jobtrack-status-orange: oklch(0.60 0.15 50);
     --jobtrack-status-bg-orange: oklch(0.96 0.05 50);
 
-    --jobtrack-status-green: oklch(0.55 0.18 150);
+    --jobtrack-status-green: oklch(0.48 0.18 150);
     --jobtrack-status-bg-green: oklch(0.95 0.05 150);
 
     --jobtrack-status-grey: oklch(0.40 0.02 250);
@@ -72,12 +72,12 @@
 }
 
 @keyframes jobtrack-slide-up {
-  from {
-    transform: translateY(20px);
+  0% {
+    transform: translateY(24px) scale(0.96);
     opacity: 0;
   }
-  to {
-    transform: translateY(0);
+  100% {
+    transform: translateY(0) scale(1);
     opacity: 1;
   }
 }
@@ -234,7 +234,7 @@
   font-weight: 500;
   font-size: 13px;
   cursor: pointer;
-  transition: all 0.15s ease-out;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   width: 100%;
 }
 
@@ -245,12 +245,21 @@
 }
 
 #jobtrack-add-btn:active:not(:disabled) {
-  transform: scale(0.98);
+  transform: scale(0.96);
 }
 
-#jobtrack-add-btn:focus-visible {
-  outline: 2px solid var(--jobtrack-primary);
-  outline-offset: 2px;
+@keyframes jobtrack-success-pulse {
+  0% { transform: scale(0.96); box-shadow: 0 0 0 0 oklch(from var(--jobtrack-status-green) l c h / 0.5); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); box-shadow: 0 0 0 12px oklch(from var(--jobtrack-status-green) l c h / 0); }
+}
+
+#jobtrack-add-btn.success-state {
+  background: var(--jobtrack-status-green) !important;
+  color: var(--jobtrack-bg) !important;
+  border-color: var(--jobtrack-status-green) !important;
+  animation: jobtrack-success-pulse 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+  pointer-events: none;
 }
 
 /* Accessibility: Disabled Button Fix */
