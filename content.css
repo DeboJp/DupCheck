@@ -1,54 +1,54 @@
 :root {
   /* Default: Dark Theme */
-  --jobtrack-bg: oklch(0.18 0.01 250);
-  --jobtrack-surface: oklch(0.22 0.015 250);
-  --jobtrack-border: oklch(0.35 0.02 250);
-  --jobtrack-border-subtle: oklch(0.28 0.01 250);
+  --jobtrack-bg: oklch(0.14 0.0 0);
+  --jobtrack-surface: oklch(0.18 0.0 0);
+  --jobtrack-border: oklch(0.25 0.0 0);
+  --jobtrack-border-subtle: oklch(0.20 0.0 0);
 
-  --jobtrack-text-main: oklch(0.95 0.01 250);
-  --jobtrack-text-muted: oklch(0.70 0.02 250);
+  --jobtrack-text-main: oklch(0.95 0.0 0);
+  --jobtrack-text-muted: oklch(0.65 0.0 0);
 
-  --jobtrack-primary: oklch(0.65 0.20 260); 
-  --jobtrack-primary-hover: oklch(0.70 0.20 260);
+  --jobtrack-primary: oklch(0.65 0.25 260); 
+  --jobtrack-primary-hover: oklch(0.70 0.25 260);
 
   /* Status Tokens */
-  --jobtrack-status-red: oklch(0.65 0.18 25);
-  --jobtrack-status-bg-red: oklch(0.25 0.05 25);
+  --jobtrack-status-red: oklch(0.65 0.22 25);
+  --jobtrack-status-bg-red: oklch(0.20 0.05 25);
   
-  --jobtrack-status-orange: oklch(0.70 0.15 50);
-  --jobtrack-status-bg-orange: oklch(0.25 0.05 50);
+  --jobtrack-status-orange: oklch(0.65 0.20 50);
+  --jobtrack-status-bg-orange: oklch(0.20 0.05 50);
 
-  --jobtrack-status-green: oklch(0.70 0.18 150);
-  --jobtrack-status-bg-green: oklch(0.25 0.05 150);
+  --jobtrack-status-green: oklch(0.70 0.22 150);
+  --jobtrack-status-bg-green: oklch(0.20 0.05 150);
 
-  --jobtrack-status-grey: oklch(0.60 0.02 250);
-  --jobtrack-status-bg-grey: oklch(0.22 0.01 250);
+  --jobtrack-status-grey: oklch(0.50 0.0 0);
+  --jobtrack-status-bg-grey: oklch(0.20 0.0 0);
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --jobtrack-bg: oklch(0.98 0.01 250);
+    --jobtrack-bg: oklch(0.98 0.0 0);
     --jobtrack-surface: oklch(1 0 0);
-    --jobtrack-border: oklch(0.85 0.02 250);
-    --jobtrack-border-subtle: oklch(0.92 0.01 250);
+    --jobtrack-border: oklch(0.85 0.0 0);
+    --jobtrack-border-subtle: oklch(0.92 0.0 0);
 
-    --jobtrack-text-main: oklch(0.15 0.02 250);
-    --jobtrack-text-muted: oklch(0.40 0.02 250);
+    --jobtrack-text-main: oklch(0.15 0.0 0);
+    --jobtrack-text-muted: oklch(0.40 0.0 0);
     
-    --jobtrack-primary: oklch(0.55 0.20 260);
-    --jobtrack-primary-hover: oklch(0.50 0.20 260);
+    --jobtrack-primary: oklch(0.60 0.25 260);
+    --jobtrack-primary-hover: oklch(0.55 0.25 260);
 
-    --jobtrack-status-red: oklch(0.55 0.18 25);
+    --jobtrack-status-red: oklch(0.55 0.22 25);
     --jobtrack-status-bg-red: oklch(0.96 0.03 25);
     
-    --jobtrack-status-orange: oklch(0.60 0.15 50);
+    --jobtrack-status-orange: oklch(0.60 0.20 50);
     --jobtrack-status-bg-orange: oklch(0.96 0.05 50);
 
-    --jobtrack-status-green: oklch(0.48 0.18 150);
+    --jobtrack-status-green: oklch(0.50 0.22 150);
     --jobtrack-status-bg-green: oklch(0.95 0.05 150);
 
-    --jobtrack-status-grey: oklch(0.40 0.02 250);
-    --jobtrack-status-bg-grey: oklch(0.95 0.01 250);
+    --jobtrack-status-grey: oklch(0.40 0.0 0);
+    --jobtrack-status-bg-grey: oklch(0.95 0.0 0);
   }
 }
 
@@ -59,9 +59,10 @@
   width: 300px; /* Slight bump for monospace urls */
   background: var(--jobtrack-bg);
   border: 1px solid var(--jobtrack-border);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  box-shadow: none;
+  border-radius: 0;
   z-index: 2147483647; /* MAX INT for native SPA injection */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   color: var(--jobtrack-text-main);
   padding: 16px;
   display: flex;
@@ -117,6 +118,7 @@
   cursor: pointer;
   padding: 0;
   margin: 0;
+  border-radius: 0;
   transition: color 0.15s;
 }
 
@@ -146,12 +148,12 @@
   color: var(--jobtrack-text-muted);
   border: 1px solid var(--jobtrack-border-subtle);
   padding: 2px 6px;
-  border-radius: 2px;
+  border-radius: 0;
   font-weight: 500;
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 /* Replaced inline styles from content.js */
@@ -173,7 +175,7 @@
 
 .jobtrack-preview-title {
   color: var(--jobtrack-text-muted);
-  font-size: 10px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 8px;
@@ -204,10 +206,11 @@
 .jobtrack-preview-badge {
   font-weight: 600;
   padding: 2px 4px;
-  border-radius: 2px;
+  border-radius: 0;
   font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 .jobtrack-badge-exact { background: var(--jobtrack-status-bg-red); color: var(--jobtrack-status-red); border: 1px solid var(--jobtrack-status-red); }
@@ -249,6 +252,7 @@
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   width: 100%;
+  border-radius: 0;
 }
 
 #jobtrack-add-btn:hover:not(:disabled) {

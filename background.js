@@ -63,13 +63,19 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
       const jNorm = normalizeUrl(j.url);
       const sim = getSimilarityPercentage(currentNorm, jNorm);
       const domainMatch = isDomainMatch(tab.url, j.url);
-      const coloredDiff = diffStringsColored(currentNorm, jNorm);
-      return { ...j, sim, domainMatch, coloredDiff };
+      return { ...j, jNorm, sim, domainMatch };
     });
     
     const matches = scoredJobs.filter(j => j.sim > 0 || j.domainMatch)
-                              .sort((a, b) => b.sim - a.sim)
-                              .slice(0, 3);
+                              .sort((a, b) => {
+                                if (b.sim !== a.sim) return b.sim - a.sim;
+                                return b.timestamp - a.timestamp;
+                              })
+                              .slice(0, 3)
+                              .map(m => ({
+                                ...m, 
+                                coloredDiff: diffStringsColored(currentNorm, m.jNorm) 
+                              }));
                               
     const isExactMatch = jobs.some(j => normalizeUrl(j.url) === currentNorm);
     
@@ -116,15 +122,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         dateString: getTodayDateString()
       };
       
-      const currentNorm = normalizeUrl(request.url);
-      if (!jobs.some(j => normalizeUrl(j.url) === currentNorm)) {
-        jobs.push(newJob);
-        chrome.storage.local.set({ appliedJobs: jobs }, () => {
-          sendResponse({ success: true });
-        });
-      } else {
-        sendResponse({ success: false, reason: 'Already exists' });
-      }
+      // Allow adding exactly similar URLs. They will just have a newer timestamp.
+      jobs.push(newJob);
+      chrome.storage.local.set({ appliedJobs: jobs }, () => {
+        sendResponse({ success: true });
+      });
     });
     return true; 
   }

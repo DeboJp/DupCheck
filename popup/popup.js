@@ -86,11 +86,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         else if (sim > 70) type = 'high';
         else if (domainMatch) type = 'domain';
 
-        return { ...j, sim, type, domainMatch, coloredDiff: diffStringsColored(currentNorm, jNorm) };
+        return { ...j, jNorm, sim, type, domainMatch };
       });
 
       // Filter matches to those that have at least some similarity or domain match
-      const matches = scoredJobs.filter(j => j.sim > 30 || j.domainMatch).sort((a, b) => b.sim - a.sim);
+      const matches = scoredJobs.filter(j => j.sim > 30 || j.domainMatch).sort((a, b) => {
+        if (b.sim !== a.sim) return b.sim - a.sim;
+        return b.timestamp - a.timestamp;
+      }).map(m => ({
+        ...m, 
+        coloredDiff: diffStringsColored(currentNorm, m.jNorm) 
+      }));
 
       if (matches.length > 0) {
         matchesSection.style.display = 'block';
@@ -131,6 +137,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const item = document.createElement('li');
       item.className = 'job-item';
+      item.tabIndex = 0; // Accessibility
+      item.setAttribute('role', 'button');
       item.innerHTML = `
         <div class="job-meta">
           <span class="job-date">${new Date(j.timestamp).toLocaleString()}</span>
@@ -140,6 +148,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       `;
       item.addEventListener('click', () => {
          chrome.tabs.create({ url: j.url });
+      });
+      item.addEventListener('keydown', (e) => {
+         if (e.key === 'Enter' || e.key === ' ') {
+           e.preventDefault();
+           chrome.tabs.create({ url: j.url });
+         }
       });
       container.appendChild(item);
     });

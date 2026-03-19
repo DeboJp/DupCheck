@@ -51,7 +51,7 @@ if (!window.jobTrackContentScriptLoaded) {
     
     let headerText = isExactMatch ? '⚠️ Already Applied Here' : 'Looks Like a New Job';
     let btnHtml = isExactMatch 
-      ? `<button id="jobtrack-add-btn" disabled>Already Logged</button>` 
+      ? `<button id="jobtrack-add-btn">Add Again</button>` 
       : `<button id="jobtrack-add-btn">Add to History</button>`;
 
     container.innerHTML = `
@@ -80,27 +80,25 @@ if (!window.jobTrackContentScriptLoaded) {
     });
 
     const addBtn = document.getElementById('jobtrack-add-btn');
-    if (!isExactMatch) {
-      addBtn.addEventListener('click', () => {
-        addBtn.textContent = 'Saving...';
-        addBtn.disabled = true;
+    addBtn.addEventListener('click', () => {
+      addBtn.textContent = 'Saving...';
+      addBtn.disabled = true;
 
-        chrome.runtime.sendMessage({ action: 'add_to_db', url: url }, (response) => {
-          if (response && response.success) {
-            addBtn.textContent = 'Added!';
-            addBtn.classList.add('success-state');
-            setTimeout(() => {
-              if (container.parentNode) container.remove();
-            }, 1500);
-          } else {
-            addBtn.textContent = 'Failed / Exists';
-            setTimeout(() => {
-               addBtn.disabled = false;
-               addBtn.textContent = 'Add to History';
-            }, 2000);
-          }
-        });
+      chrome.runtime.sendMessage({ action: 'add_to_db', url: url }, (response) => {
+        if (response && response.success) {
+          addBtn.textContent = 'Added!';
+          addBtn.classList.add('success-state');
+          setTimeout(() => {
+            if (container.parentNode) container.remove();
+          }, 1500);
+        } else {
+          addBtn.textContent = 'Failed';
+          setTimeout(() => {
+             addBtn.disabled = false;
+             addBtn.textContent = isExactMatch ? 'Add Again' : 'Add to History';
+          }, 2000);
+        }
       });
-    }
+    });
   }
 }

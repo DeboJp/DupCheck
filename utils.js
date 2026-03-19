@@ -58,7 +58,8 @@ export function isDomainMatch(url1, url2) {
 }
 
 export function getTodayDateString() {
-  return new Date().toISOString().split('T')[0];
+  const d = new Date();
+  return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().split('T')[0];
 }
 
 export function diffStringsColored(current, stored) {
